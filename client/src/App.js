@@ -1,9 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import Post from "./components/Post";
 
 function App() {
   return (
-    <div>Hello wrold</div>
+    <main>
+      <Header />
+      <Post />
+      <Post />
+      <Post />
+    </main>
   );
 }
 
