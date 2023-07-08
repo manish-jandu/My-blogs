@@ -1,10 +1,12 @@
-import { useState } from "react";
-import {Navigate} from "react-router-dom";
+import { useContext,useState } from "react";
+import { Navigate } from "react-router-dom";
+import {UserContext} from "../UserContext";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false)
+  const [redirect, setRedirect] = useState(false);
+  const { setUserInfo } = useContext(UserContext);
 
   async function login(ev) {
     ev.preventDefault();
@@ -16,11 +18,14 @@ export default function Login() {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-        credentials: "include"
+        credentials: "include",
       });
 
       if (response.status === 200) {
-        setRedirect(true);
+        response.json().then((userInfo) => {
+          setUserInfo(userInfo);
+          setRedirect(true);
+        });
       } else {
         alert("Login Failed");
       }
@@ -29,8 +34,8 @@ export default function Login() {
     }
   }
 
-  if(redirect){
-    return <Navigate to={"/"}/>
+  if (redirect) {
+    return <Navigate to={"/"} />;
   }
 
   return (
