@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     min: 4,
     unique: true,
   },
-  username: {
+  password: {
     type: String,
     required: true,
   },
@@ -16,4 +16,4 @@ const UserSchema = new Schema({
 
 const UserModel = model("User", UserSchema);
 
-module.exports = UserModel;f
+module.exports = UserModel;
